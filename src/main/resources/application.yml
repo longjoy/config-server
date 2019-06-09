@@ -1,0 +1,27 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+
+---
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/longjoy/config-repo.git
+          searchPaths: ${APP_LOCATE:dev}
+#          username: user
+#          password: pwd
+---
+spring:
+  rabbitmq:
+    host: 106.15.233.99
+    port: 5672
+    username: admin
+    password: admin
+
+management:
+  security:
+    enabled: false
