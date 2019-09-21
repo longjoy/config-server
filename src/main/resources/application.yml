@@ -1,8 +1,35 @@
 server:
   port: 8888
+
 spring:
   application:
     name: config-server
+  cloud:
+    consul:
+      discovery:
+        preferIpAddress: true
+        enabled: true
+        register: true
+        service-name: config-service
+        health-check-interval: 10s
+        health-check-timeout: 20s
+        heartbeat:
+          enabled: true
+        ip-address: localhost
+        port: ${server.port}
+        lifecycle:
+          enabled: true
+        scheme: http
+        prefer-agent-address: false
+        register-health-check: true
+        tags: master
+        query-passing: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 4
+        max-interval: 1000
+      host: 106.15.233.99
+      port: 8500
 
 ---
 spring:
@@ -10,7 +37,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/longjoy/config-repo.git
+          uri: https://gitee.com/cloud-source/config-repo.git
           searchPaths: ${APP_LOCATE:dev}
 #          username: user
 #          password: pwd
@@ -23,5 +50,7 @@ spring:
     password: admin
 
 management:
-  security:
-    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
