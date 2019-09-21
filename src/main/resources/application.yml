@@ -15,7 +15,7 @@ spring:
         health-check-timeout: 20s
         heartbeat:
           enabled: true
-        ip-address: localhost
+        ip-address: 106.15.233.99
         port: ${server.port}
         lifecycle:
           enabled: true
